@@ -21,21 +21,77 @@ body {
   align-items: center;
   flex-wrap: wrap;
   height: 100%;
-  height: 600px;
-  width: 600px;
+  height: 640px;
+  width: 640px;
   
 }
 
 .arena div {
-  border: 1px solid #B5651D;
+  /* border: 1px solid #B5651D; */
   flex-grow: 1;
-  height: 5.555555556%;
-  width: 5.555555556%;
+  height: 5.55555555556%;
+  width: 5.55555555556%;
+  background-color: #c2b280;
+  /* border-radius: 3px; */
+}
+
+.arena div.tree {
+  background-image: url('../Characters/tree.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.arena div.bedtopleft{
+  background-image: url('../Characters/bed.png');
+  background-position: left top;
+  background-size: 125%;
+}
+
+.arena div.bedtopright{
+  background-image: url('../Characters/bed.png');
+  background-position: right top;
+  background-size: 125%;
+}
+
+.arena div.bedbottomleft{
+  background-image: url('../Characters/bed.png');
+  background-position: left bottom;
+  background-size: 125%;
+}
+
+.arena div.bedbottomright{
+  background-image: url('../Characters/bed.png');
+  background-position: right bottom;
+  background-size: 125%;
+}
+
+.arena div.rock{
+  background-image: url('../Characters/rocks.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.arena div.poo{
+  background-image: url('../Characters/poo.png');
+  background-size: 40%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #c2b280;
+}
+
+.arena div.sandwich{
+  background-image: url('../Characters/sandwich.png');
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
 }
 
 .arena div.zooman {
   background-image: url('../Characters/parc-man.png');
+  filter: brightness(1.05);
   background-position: center;
-  background-size: contain;
+  background-size: 130%;
   background-repeat: no-repeat;
 }
