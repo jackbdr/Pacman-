@@ -1,12 +1,14 @@
 function init() {
-
+  
 
   // * Character set-up
   const zoomanClass = 'zooman'
   const startPosition = 224
   let currentPosition = startPosition
 
-  //  * Create Arena
+
+
+  //  ***** Create Arena top *****
   const arena = document.querySelector('.arena')
 
   const width = 18
@@ -17,7 +19,7 @@ function init() {
     for (let i = 0; i < sqCount; i++) {
       const sq = document.createElement('div')
       sq.id = i
-      // sq.innerText = i
+      sq.innerText = i
       arena.appendChild(sq)
       sqs.push(sq)
     }
@@ -26,14 +28,11 @@ function init() {
   createArena()
 
 
-
-
   // * Add trees to arena
 
   const treeClass = 'tree'
   const edgeSqs = sqs.filter(sq => (parseFloat(sq.id) % width === 0 && parseFloat(sq.id) !== 144) || parseFloat(sq.id) < width || (parseFloat(sq.id) % width === width - 1 && parseFloat(sq.id) !== 161) || parseFloat(sq.id) + width > sqCount)
   edgeSqs.forEach(sq => sq.classList.add(treeClass))
-
 
 
   //  * add bed (holding place)
@@ -65,7 +64,7 @@ function init() {
   const sandwichSqs = [sqs[19], sqs[34], sqs[289], sqs[304]]
   sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
 
-
+// ***** create arena bottom *****
 
   // * Add zooman 
   function addZooman(position) {
@@ -80,6 +79,10 @@ function init() {
 
 
   // * movement function *
+
+  // score variables
+  let score = 0
+  const scoreNum = document.querySelector('#scorenum')
 
   pooSqs.forEach(sq => sq.classList.add('moveable'))
 
@@ -112,12 +115,42 @@ function init() {
     } else {
       currentPosition
     }
+    
+    // * eating sandwich
+
+    if (sqs[currentPosition].classList.contains(zoomanClass && sandwichClass)) {
+      sqs[currentPosition].classList.remove(sandwichClass)
+      sqs[currentPosition].classList.remove(pooClass)
+      score += 100
+      scoreNum.innerHTML = score
+      // * change of movement in 'ghosts' here??? 
+      // as 'here' is 'less global' will it override the big setInterval function used for normal ghost movement ???
+      // can call func here and write it somewhere else
+    }
+
+    // * clearing mess
+
+    if (sqs[currentPosition].classList.contains(zoomanClass && pooClass)) {
+      sqs[currentPosition].classList.remove(pooClass)
+      score += 19
+      scoreNum.innerHTML = score
+    }
+
+
+
+
 
 
     addZooman(currentPosition)
-
-
   }
+
+  
+  
+
+  
+
+
+
 
 
   document.addEventListener('keydown', zoomanMovement)
