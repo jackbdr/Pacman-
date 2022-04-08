@@ -7,12 +7,19 @@
     <script src="scripts/app.js" charset="utf-8"></script>
   </head>
   <body>
-    <header class="scoreboard">
-      <h3 class="score">Score <span id="scorenum">0</span></h3>
-      <h3 class="energy">Energy <span id="energynum">3</span></h3>
-    </header>
-    <div class="arena-wrapper">
-      <div class="arena"></div>
-    </div>
+    <section class="instructions">
+      <h1>Safari Parc-Man</h1>
+      <p>Help ParcMan clear up the park and find the energy to put the lion cubs to bed!</p>
+      <button id="start">Start Game</button>
+    </section>
+    <section class="game hidden">
+      <header class="scoreboard">
+        <h3 class="score">Score <span id="scorenum">0</span></h3>
+        <h3 class="energy">Energy <span id="energynum">3</span></h3>
+      </header>
+      <div class="arena-wrapper">
+        <div class="arena"></div>
+      </div>
+    </section>
   </body>
 </html>

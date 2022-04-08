@@ -1,11 +1,34 @@
 function init() {
-  
+
+
+  // * first display
+  const startButton = document.querySelector('#start')
+  const instructions = document.querySelector('.instructions')
+  const game = document.querySelector('.game')
+
+  startButton.addEventListener('click', startGame)
+
+  function startGame() {
+    instructions.classList.add('hidden')
+    game.classList.remove('hidden')
+  }
 
   // * Character set-up
   const zoomanClass = 'zooman'
-  const startPosition = 224
-  let currentPosition = startPosition
+  const zoomanStart = 224
+  let zoomanCurrent = zoomanStart
 
+  const lionClass = 'lion'
+  const lionStart = 304
+  let lionCurrent = lionStart
+
+  // score variables
+  let score = 0
+  const scoreNum = document.querySelector('#scorenum')
+
+  // energy variables
+  let energy = 3
+  const energyNum = document.querySelector('#energynum')
 
 
   //  ***** Create Arena top *****
@@ -23,7 +46,8 @@ function init() {
       arena.appendChild(sq)
       sqs.push(sq)
     }
-    addZooman(startPosition)
+    addZooman(zoomanStart)
+    addLion(lionStart)
   }
   createArena()
 
@@ -64,7 +88,23 @@ function init() {
   const sandwichSqs = [sqs[19], sqs[34], sqs[289], sqs[304]]
   sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
 
-// ***** create arena bottom *****
+  // ***** create arena bottom *****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // * movement functions *
 
   // * Add zooman 
   function addZooman(position) {
@@ -78,12 +118,6 @@ function init() {
 
 
 
-  // * movement function *
-
-  // score variables
-  let score = 0
-  const scoreNum = document.querySelector('#scorenum')
-
   pooSqs.forEach(sq => sq.classList.add('moveable'))
 
   function zoomanMovement(event) {
@@ -94,33 +128,33 @@ function init() {
     const up = 38
     const down = 40
 
-    if (key === left && sqs[currentPosition - 1].classList.contains('moveable') === true) {
-      removeZooman(currentPosition)
-      currentPosition--
-    } else if (key === right && sqs[currentPosition + 1].classList.contains('moveable') === true) {
-      removeZooman(currentPosition)
-      currentPosition++
-    } else if (key === up && sqs[currentPosition - width].classList.contains('moveable') === true) {
-      removeZooman(currentPosition)
-      currentPosition -= width
-    } else if (key === down && sqs[currentPosition + width].classList.contains('moveable') === true) {
-      removeZooman(currentPosition)
-      currentPosition += width
-    } else if (key === left && parseFloat(sqs[currentPosition].id) === 144) {
-      removeZooman(currentPosition)
-      currentPosition = 161
-    } else if (key === right && parseFloat(sqs[currentPosition].id) === 161) {
-      removeZooman(currentPosition)
-      currentPosition = 144
+    if (key === left && sqs[zoomanCurrent - 1].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent--
+    } else if (key === right && sqs[zoomanCurrent + 1].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent++
+    } else if (key === up && sqs[zoomanCurrent - width].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent -= width
+    } else if (key === down && sqs[zoomanCurrent + width].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent += width
+    } else if (key === left && parseFloat(sqs[zoomanCurrent].id) === 144) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = 161
+    } else if (key === right && parseFloat(sqs[zoomanCurrent].id) === 161) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = 144
     } else {
-      currentPosition
+      zoomanCurrent
     }
-    
+
     // * eating sandwich
 
-    if (sqs[currentPosition].classList.contains(zoomanClass && sandwichClass)) {
-      sqs[currentPosition].classList.remove(sandwichClass)
-      sqs[currentPosition].classList.remove(pooClass)
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && sandwichClass)) {
+      sqs[zoomanCurrent].classList.remove(sandwichClass)
+      sqs[zoomanCurrent].classList.remove(pooClass)
       score += 100
       scoreNum.innerHTML = score
       // * change of movement in 'ghosts' here??? 
@@ -130,24 +164,146 @@ function init() {
 
     // * clearing mess
 
-    if (sqs[currentPosition].classList.contains(zoomanClass && pooClass)) {
-      sqs[currentPosition].classList.remove(pooClass)
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && pooClass)) {
+      sqs[zoomanCurrent].classList.remove(pooClass)
       score += 19
       scoreNum.innerHTML = score
     }
 
+    loseEnergy()
 
 
-
-
-
-    addZooman(currentPosition)
+    addZooman(zoomanCurrent)
   }
 
-  
+
+  //  * zooman and lion share same square
+    
+  function loseEnergy() {
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass)) {
+      energy -= 1
+      energyNum.innerHTML = energy
+      
+      // sqs[zoomanCurrent].classList.remove(zoomanClass)
+      // pooSqs.forEach(sq => sq.classList.remove(lionClass)) //could have actually adding a class maybe an transition 
+    }
+  }
   
 
   
+
+
+  // * lion movement -- 1st lion
+
+  // * Add lion
+  function addLion(position) {
+    sqs[position].classList.add(lionClass)
+  }
+
+  // * Remove lion 
+  function removeLion(position) {
+    sqs[position].classList.remove(lionClass)
+  }
+
+  function lionDown() {
+    removeLion(lionCurrent)
+    lionCurrent += width
+    addLion(lionCurrent)
+  }
+
+  function lionRight() {
+    removeLion(lionCurrent)
+    lionCurrent++
+    addLion(lionCurrent)
+  }
+
+  function lionLeft() {
+    removeLion(lionCurrent)
+    lionCurrent--
+    addLion(lionCurrent)
+  }
+
+  function lionUp() {
+    removeLion(lionCurrent)
+    lionCurrent -= width
+    addLion(lionCurrent)
+  }
+
+
+  // * random Lion Movement
+  // Lion 1 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const line1 = [sqs[19], sqs[20], sqs[21], sqs[22], sqs[23], sqs[24], sqs[25], sqs[26], sqs[27], sqs[28], sqs[29], sqs[30], sqs[31], sqs[32], sqs[33], sqs[34]]
+  // const line2 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line3 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line4 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line5 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line6 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line7 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line8 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line9 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line10 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line11 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line12 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line13 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line14 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line15 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+  // const line16 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
+
+
+
+  // const zoomanIdNum = parseFloat(sqs[zoomanCurrent].id)
+  // const lionIdNum = parseFloat(sqs[lionCurrent].id)
+
+
+
+  // function lionMovement() {
+  //   setInterval(() => {
+
+  //     if (parseFloat(sqs[zoomanCurrent].id) > parseFloat(sqs[lionCurrent].id) && parseFloat(sqs[zoomanCurrent].id) - parseFloat(sqs[lionCurrent].id) < width && sqs[lionCurrent + 1].classList.contains('moveable') === true) {
+  //       lionRight()
+  //     } else if (parseFloat(sqs[zoomanCurrent].id) > parseFloat(sqs[lionCurrent].id) && parseFloat(sqs[zoomanCurrent].id) - parseFloat(sqs[lionCurrent].id) < width && sqs[lionCurrent + 1].classList.contains('moveable') !== true) {
+  //       if (sqs[lionCurrent + width].classList.contains('moveable')) {
+  //         lionDown()
+  //       }
+  //     }
+      
+  //     if (parseFloat(sqs[zoomanCurrent].id) < parseFloat(sqs[lionCurrent].id) && parseFloat(sqs[lionCurrent].id) - parseFloat(sqs[zoomanCurrent].id) < width && sqs[lionCurrent - 1].classList.contains('moveable') === true) {
+  //       lionLeft()
+  //     }
+
+
+  //     loseEnergy()
+
+
+
+
+
+  //   }, 500)
+
+  // }
+
+
+  // lionMovement()
 
 
 
