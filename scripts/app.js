@@ -19,7 +19,7 @@ function init() {
   let zoomanCurrent = zoomanStart
 
   const lionClass = 'lion'
-  const lionStart = 304
+  const lionStart = 134
   let lionCurrent = lionStart
 
   // score variables
@@ -47,7 +47,7 @@ function init() {
       sqs.push(sq)
     }
     addZooman(zoomanStart)
-    addLion(lionStart)
+    // addLion(lionStart)
   }
   createArena()
 
@@ -69,10 +69,10 @@ function init() {
 
   // * add rocks (walls)
   const rockClass = 'rock'
-  const rockSqs = [sqs[38], sqs[39], sqs[40], sqs[42], sqs[44], sqs[45], sqs[47], sqs[49], sqs[50], sqs[51], sqs[56], sqs[60], sqs[62], sqs[63], sqs[65], sqs[69], sqs[74], sqs[76], sqs[78], sqs[80], sqs[81], sqs[83], sqs[85], sqs[87], sqs[94], sqs[96],
-    sqs[98], sqs[99], sqs[101], sqs[103], sqs[109], sqs[111], sqs[112], sqs[121], sqs[122], sqs[124], sqs[132], sqs[137], sqs[146], sqs[148], sqs[150], sqs[155], sqs[157], sqs[159], sqs[164], sqs[166], sqs[168], sqs[173], sqs[175], sqs[177], sqs[184],
-    sqs[188], sqs[189], sqs[193], sqs[200], sqs[202], sqs[203], sqs[204], sqs[206], sqs[207], sqs[209], sqs[210], sqs[211], sqs[213], sqs[218], sqs[231], sqs[236], sqs[238], sqs[239], sqs[240], sqs[242], sqs[243], sqs[245], sqs[246], sqs[247], sqs[249],
-    sqs[254], sqs[256], sqs[260], sqs[261], sqs[265], sqs[267], sqs[272], sqs[274], sqs[276], sqs[277], sqs[278], sqs[279], sqs[280], sqs[281], sqs[283], sqs[285]]
+  const rockSqs = [sqs[26], sqs[27], sqs[38], sqs[39], sqs[40], sqs[42], sqs[44], sqs[45], sqs[47], sqs[49], sqs[50], sqs[51], sqs[56], sqs[60], sqs[62], sqs[63], sqs[65], sqs[69], sqs[74], sqs[76], sqs[78], sqs[80], sqs[81], sqs[83], sqs[85], sqs[87], sqs[94], sqs[96],
+  sqs[98], sqs[99], sqs[101], sqs[103], sqs[109], sqs[111], sqs[112], sqs[121], sqs[122], sqs[124], sqs[132], sqs[137], sqs[146], sqs[148], sqs[150], sqs[155], sqs[157], sqs[159], sqs[164], sqs[166], sqs[168], sqs[173], sqs[175], sqs[177], sqs[184],
+  sqs[188], sqs[189], sqs[193], sqs[200], sqs[202], sqs[203], sqs[204], sqs[206], sqs[207], sqs[209], sqs[210], sqs[211], sqs[213], sqs[218], sqs[231], sqs[236], sqs[238], sqs[239], sqs[240], sqs[242], sqs[243], sqs[245], sqs[246], sqs[247], sqs[249],
+  sqs[254], sqs[256], sqs[260], sqs[261], sqs[265], sqs[267], sqs[272], sqs[274], sqs[276], sqs[277], sqs[278], sqs[279], sqs[280], sqs[281], sqs[283], sqs[285], sqs[292], sqs[301]]
   rockSqs.forEach(sq => sq.classList.add(rockClass))
 
 
@@ -119,6 +119,7 @@ function init() {
 
 
   pooSqs.forEach(sq => sq.classList.add('moveable'))
+
 
   function zoomanMovement(event) {
 
@@ -178,19 +179,19 @@ function init() {
 
 
   //  * zooman and lion share same square
-    
+
   function loseEnergy() {
     if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass)) {
       energy -= 1
       energyNum.innerHTML = energy
-      
+
       // sqs[zoomanCurrent].classList.remove(zoomanClass)
       // pooSqs.forEach(sq => sq.classList.remove(lionClass)) //could have actually adding a class maybe an transition 
     }
   }
-  
 
-  
+
+
 
 
   // * lion movement -- 1st lion
@@ -229,28 +230,116 @@ function init() {
     addLion(lionCurrent)
   }
 
+  // * random movement 4 lions
 
-  // * random Lion Movement
-  // Lion 1 
+  class Lion {
+    constructor(lionStart, speed) {
+      this.lionStart = lionStart
+      this.speed = speed
+      this.lionCurrent = lionStart
+      this.lionTick = NaN
+    }
+  }
+
+  const lions = [
+    new Lion(134, 300),
+    new Lion(135, 300),
+    new Lion(152, 300),
+    new Lion(153, 300)
+  ]
+
+  lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
 
 
 
 
 
 
+  // * Lion 'blinky' Movement try
+
+  // 'blinky' movement
+
+  // function coordinatesOf(position) {
+  //   return [position % width, Math.floor(position / width)]
+  // }
+
+  // const directions = [+ 1, - 1, + width, - width]
+  // let direction = directions[Math.floor(Math.random() * directions.length)]
+
+  // const [lionX, lionY] = coordinatesOf(lionCurrent)
+  // const [zoomanX, zoomanY] = coordinatesOf(zoomanCurrent)
+  // const [lionNextX, lionNextY] = coordinatesOf(lionCurrent + direction)
+
+  // function isXCloser() {
+  //   if ((lionNextX - zoomanX) > (lionX - zoomanX)) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
+  // function isYCloser() {
+  //   if ((lionNextY - zoomanY) > (lionY - zoomanY)) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
+  
+
+  // const bedSqs = [sqs[134], sqs[135], sqs[152], sqs[153]]
+  // bedSqs.forEach(sq => sq.classList.add('lionMoveable'))
+
+  // function lion1move() {
+    
+  //   let lion1Tick = NaN
+    
+
+  //   lion1Tick = setInterval(() => {
+
+  //     if (sqs[lionCurrent + direction].classList.contains('moveable') || sqs[lionCurrent + direction].classList.contains('lionMoveable')) {
+  //       removeLion(lionCurrent)
+        
+
+  //       if (isXCloser() || isYCloser()) {
+  //         lionCurrent += direction
+  //         addLion(lionCurrent)
+  //       } else {
+  //         addLion(lionCurrent)
+  //         direction = directions[Math.floor(Math.random() * directions.length)]
+  //       }
+  //       addLion(lionCurrent)
+  //     } else {
+  //       direction = directions[Math.floor(Math.random() * directions.length)]
+  //     }
+
+  //     if (sqs[lionCurrent].classList.contains(zoomanClass)) {
+  //       clearInterval(lion1Tick)
+  //     }
+      
+
+
+
+  //   }, 300)
+
+    
+  // }
+
+  // lion1move()
 
 
 
 
-
-
-
-
-
-
-
-
-
+// * own try at intelligent ghost movement
+  // if (sqs[lionCurrent - width].classList.contains('moveable') || sqs[lionCurrent - width].classList.contains('lionMoveable')) {
+  //   lionUp(lionCurrent)
+  // } else if (sqs[lionCurrent + width].classList.contains('moveable') || sqs[lionCurrent + width].classList.contains('lionMoveable')) {
+  //   lionDown(lionCurrent)
+  // } else if (sqs[lionCurrent + 1].classList.contains('moveable') || sqs[lionCurrent + 1].classList.contains('lionMoveable')) {
+  //   lionRight(lionCurrent)
+  // } else if (sqs[lionCurrent - 1].classList.contains('moveable') || sqs[lionCurrent - 1].classList.contains('lionMoveable')) {
+  //   lionLeft(lionCurrent)
 
   // const line1 = [sqs[19], sqs[20], sqs[21], sqs[22], sqs[23], sqs[24], sqs[25], sqs[26], sqs[27], sqs[28], sqs[29], sqs[30], sqs[31], sqs[32], sqs[33], sqs[34]]
   // const line2 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
@@ -269,12 +358,8 @@ function init() {
   // const line15 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
   // const line16 = [sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[], sqs[]]
 
-
-
   // const zoomanIdNum = parseFloat(sqs[zoomanCurrent].id)
   // const lionIdNum = parseFloat(sqs[lionCurrent].id)
-
-
 
   // function lionMovement() {
   //   setInterval(() => {
@@ -286,16 +371,13 @@ function init() {
   //         lionDown()
   //       }
   //     }
-      
+
   //     if (parseFloat(sqs[zoomanCurrent].id) < parseFloat(sqs[lionCurrent].id) && parseFloat(sqs[lionCurrent].id) - parseFloat(sqs[zoomanCurrent].id) < width && sqs[lionCurrent - 1].classList.contains('moveable') === true) {
   //       lionLeft()
   //     }
 
 
   //     loseEnergy()
-
-
-
 
 
   //   }, 500)
