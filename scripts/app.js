@@ -5,30 +5,53 @@ function init() {
   const startButton = document.querySelector('#start')
   const instructions = document.querySelector('.instructions')
   const game = document.querySelector('.game')
+  const gameOverDisplay = document.querySelector('.gameover')
+  const againButton = document.querySelector('#again')
+  const scoreNum = document.querySelector('#scorenum')
+  const energyNum = document.querySelector('#energynum')
+  const finalScore = document.querySelector('#final-score')
 
   startButton.addEventListener('click', startGame)
+  againButton.addEventListener('click', restartGame)
+
+  // score variables
+  let score = 0
+  
+
+  // energy variables
+  let energy = 3
+  
 
   function startGame() {
     instructions.classList.add('hidden')
     game.classList.remove('hidden')
+    lions.forEach(lion => moveLion(lion))
+  }
+
+  function restartGame() {
+    gameOverDisplay.classList.add('hidden')
+    game.classList.remove('hidden')
+    gameOver = false
+    score = 0
+    energy = 3
+    scoreNum.innerHTML = score
+    energyNum.innerHTML = energy
+    pooSqs.forEach(sq => sq.classList.add(pooClass))
+    sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
   }
 
   // * Character set-up
   const zoomanClass = 'zooman'
-  const zoomanStart = 224
+  const zoomanStart = 223
   let zoomanCurrent = zoomanStart
 
   const lionClass = 'lion'
-  const lionStart = 134
-  let lionCurrent = lionStart
+  // let lionStart 
+  // let lionCurrent = lionStart
 
-  // score variables
-  let score = 0
-  const scoreNum = document.querySelector('#scorenum')
+  
 
-  // energy variables
-  let energy = 3
-  const energyNum = document.querySelector('#energynum')
+
 
 
   //  ***** Create Arena top *****
@@ -69,9 +92,9 @@ function init() {
 
   // * add rocks (walls)
   const rockClass = 'rock'
-  const rockSqs = [sqs[26], sqs[27], sqs[38], sqs[39], sqs[40], sqs[42], sqs[44], sqs[45], sqs[47], sqs[49], sqs[50], sqs[51], sqs[56], sqs[60], sqs[62], sqs[63], sqs[65], sqs[69], sqs[74], sqs[76], sqs[78], sqs[80], sqs[81], sqs[83], sqs[85], sqs[87], sqs[94], sqs[96],
-  sqs[98], sqs[99], sqs[101], sqs[103], sqs[109], sqs[111], sqs[112], sqs[121], sqs[122], sqs[124], sqs[132], sqs[137], sqs[146], sqs[148], sqs[150], sqs[155], sqs[157], sqs[159], sqs[164], sqs[166], sqs[168], sqs[173], sqs[175], sqs[177], sqs[184],
-  sqs[188], sqs[189], sqs[193], sqs[200], sqs[202], sqs[203], sqs[204], sqs[206], sqs[207], sqs[209], sqs[210], sqs[211], sqs[213], sqs[218], sqs[231], sqs[236], sqs[238], sqs[239], sqs[240], sqs[242], sqs[243], sqs[245], sqs[246], sqs[247], sqs[249],
+  const rockSqs = [sqs[26], sqs[27], sqs[38], sqs[39], sqs[40], sqs[42], sqs[44], sqs[45], sqs[47], sqs[49], sqs[50], sqs[51], sqs[56], sqs[60], sqs[62], sqs[63], sqs[65], sqs[69], sqs[74], sqs[76], sqs[78], sqs[83], sqs[85], sqs[87], sqs[94], sqs[96],
+  sqs[97], sqs[100], sqs[101], sqs[103], sqs[110], sqs[111], sqs[112], sqs[121], sqs[122], sqs[123], sqs[132], sqs[137], sqs[146], sqs[148], sqs[150], sqs[155], sqs[157], sqs[159], sqs[164], sqs[166], sqs[168], sqs[173], sqs[175], sqs[177], sqs[184],
+  sqs[188], sqs[189], sqs[193], sqs[200], sqs[202], sqs[204], sqs[205], sqs[206], sqs[207], sqs[208], sqs[209], sqs[211], sqs[213], sqs[218], sqs[224], sqs[225], sqs[231], sqs[236], sqs[238], sqs[239], sqs[240], sqs[242], sqs[243], sqs[245], sqs[246], sqs[247], sqs[249],
   sqs[254], sqs[256], sqs[260], sqs[261], sqs[265], sqs[267], sqs[272], sqs[274], sqs[276], sqs[277], sqs[278], sqs[279], sqs[280], sqs[281], sqs[283], sqs[285], sqs[292], sqs[301]]
   rockSqs.forEach(sq => sq.classList.add(rockClass))
 
@@ -80,7 +103,9 @@ function init() {
   const pooClass = 'poo'
   const pooSqs = sqs.filter(sq => sq.classList.contains(rockClass) !== true && sq.classList.contains(treeClass) !== true && sq.classList.contains('bedtopleft') !== true && sq.classList.contains('bedtopright') !== true && sq.classList.contains('bedbottomleft') !== true && sq.classList.contains('bedbottomright') !== true)
   pooSqs.forEach(sq => sq.classList.add(pooClass))
-  sqs[224].classList.remove(pooClass)
+  sqs[223].classList.remove(pooClass)
+  console.log(pooSqs.length)
+  
 
 
   // * add sandwich treat
@@ -121,6 +146,35 @@ function init() {
   pooSqs.forEach(sq => sq.classList.add('moveable'))
 
 
+  // * create lions
+
+  class Lion {
+    constructor(lionStart, speed) {
+      this.lionStart = lionStart
+      this.speed = speed
+      this.lionCurrent = lionStart
+      this.lionTick = NaN
+      this.lionRun = false
+    }
+  }
+
+  const lions = [
+    new Lion(115, 250),
+    new Lion(118, 250),
+    new Lion(169, 250),
+    new Lion(172, 250)
+  ]
+
+  lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
+
+  
+
+
+
+
+
+  // * zooman key movement
+
   function zoomanMovement(event) {
 
     const key = event.keyCode
@@ -158,6 +212,10 @@ function init() {
       sqs[zoomanCurrent].classList.remove(pooClass)
       score += 100
       scoreNum.innerHTML = score
+
+      // * lions run
+      lions.forEach(lion => lion.lionRun = true)
+      setTimeout(lionsBackToNorm, 8000)
       // * change of movement in 'ghosts' here??? 
       // as 'here' is 'less global' will it override the big setInterval function used for normal ghost movement ???
       // can call func here and write it somewhere else
@@ -171,24 +229,32 @@ function init() {
       scoreNum.innerHTML = score
     }
 
-    loseEnergy()
+
+    // * zooman and lion collision
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lions.every(lion => lion.lionRun !== true)) {
+      energy -= 1
+      energyNum.innerHTML = energy
+      lions.forEach(lion => sqs[lion.lionCurrent].classList.remove(lionClass))
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = zoomanStart
+      addZooman(zoomanCurrent)
+      lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+    } else if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lions.every(lion => lion.lionRun === true)) {     // when lionRun === true
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+
+      // lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+      // lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
+    }
+
+
+
+
 
 
     addZooman(zoomanCurrent)
   }
 
-
-  //  * zooman and lion share same square
-
-  function loseEnergy() {
-    if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass)) {
-      energy -= 1
-      energyNum.innerHTML = energy
-
-      // sqs[zoomanCurrent].classList.remove(zoomanClass)
-      // pooSqs.forEach(sq => sq.classList.remove(lionClass)) //could have actually adding a class maybe an transition 
-    }
-  }
 
 
 
@@ -206,49 +272,175 @@ function init() {
     sqs[position].classList.remove(lionClass)
   }
 
-  function lionDown() {
-    removeLion(lionCurrent)
-    lionCurrent += width
-    addLion(lionCurrent)
+
+
+
+
+
+
+
+  // * turns off 'lionRun' 
+  function lionsBackToNorm() {
+    lions.forEach(lion => lion.lionRun = false)
   }
 
-  function lionRight() {
-    removeLion(lionCurrent)
-    lionCurrent++
-    addLion(lionCurrent)
-  }
+  // function lionDown() {
+  //   removeLion(lionCurrent)
+  //   lionCurrent += width
+  //   addLion(lionCurrent)
+  // }
 
-  function lionLeft() {
-    removeLion(lionCurrent)
-    lionCurrent--
-    addLion(lionCurrent)
-  }
+  // function lionRight() {
+  //   removeLion(lionCurrent)
+  //   lionCurrent++
+  //   addLion(lionCurrent)
+  // }
 
-  function lionUp() {
-    removeLion(lionCurrent)
-    lionCurrent -= width
-    addLion(lionCurrent)
-  }
+  // function lionLeft() {
+  //   removeLion(lionCurrent)
+  //   lionCurrent--
+  //   addLion(lionCurrent)
+  // }
+
+  // function lionUp() {
+  //   removeLion(lionCurrent)
+  //   lionCurrent -= width
+  //   addLion(lionCurrent)
+  // }
+
+
+
+
+
+
 
   // * random movement 4 lions
+  let gameOver = false
+  
 
-  class Lion {
-    constructor(lionStart, speed) {
-      this.lionStart = lionStart
-      this.speed = speed
-      this.lionCurrent = lionStart
-      this.lionTick = NaN
+  function moveLion(lion) {
+    const directions = [+ 1, - 1, + width, - width]
+    let direction = directions[Math.floor(Math.random() * directions.length)]
+
+    
+
+    // if (lions.every(lion => lion.lionCurrent = lion.lionStart)) ---> attempt at giving little break if have just lost a life
+    setTimeout(() => {
+
+      lion.lionTick = setInterval(() => {
+        if (gameOver === false) {
+          // if lionCurrent + direction is available then move into that space 
+          if ((sqs[lion.lionCurrent + direction].classList.contains('moveable') || sqs[lion.lionCurrent + direction].classList.contains('lionMoveable')) && sqs[lion.lionCurrent + direction].classList.contains(lionClass) !== true && lion.lionRun !== true) {
+            removeLion(lion.lionCurrent)
+            sqs.forEach(sq => sq.classList.remove('lionrun'))
+            lion.lionCurrent += direction
+            addLion(lion.lionCurrent)
+          } else if ((sqs[lion.lionCurrent + direction].classList.contains('moveable') || sqs[lion.lionCurrent + direction].classList.contains('lionMoveable')) && sqs[lion.lionCurrent + direction].classList.contains(lionClass) !== true && lion.lionRun === true) {
+            removeLion(lion.lionCurrent)
+            sqs[lion.lionCurrent].classList.remove('lionrun')
+            lion.lionCurrent += direction
+            addLion(lion.lionCurrent)
+            sqs[lion.lionCurrent].classList.add('lionrun')
+          } else {
+            direction = directions[Math.floor(Math.random() * directions.length)]
+          }
+
+          
+          // zooman and lion collision
+          zoomanHitLion(lion)
+
+          // if energy reaches 0, then GameOver!!
+          gameOverFunc(lion)
+
+        }
+
+      }, lion.speed)
+
+    }, 1000)
+
+    // } else {
+    //   lion.lionTick = setInterval(() => {
+
+    //     // if lionCurrent + direction is available then move into that space 
+    //     randomMoveLion(lion)
+
+    //     // zooman and lion collision
+    //     zoomanHitLion(lion)
+
+    //     // if energy reaches 0, then GameOver!!
+    //     gameOver(lion)
+
+    //   }, lion.speed)
+    // }
+
+
+
+  }
+
+
+
+
+
+  // function randomMoveLion(lion) {
+  //   if ((sqs[lion.lionCurrent + direction].classList.contains('moveable') || sqs[lion.lionCurrent + direction].classList.contains('lionMoveable')) && sqs[lion.lionCurrent + direction].classList.contains(lionClass) !== true && lion.lionRun !== true) {
+  //     removeLion(lion.lionCurrent)
+  //     sqs.forEach(sq => sq.classList.remove('lionrun'))
+  //     lion.lionCurrent += direction
+  //     addLion(lion.lionCurrent)
+  //   } else if ((sqs[lion.lionCurrent + direction].classList.contains('moveable') || sqs[lion.lionCurrent + direction].classList.contains('lionMoveable')) && sqs[lion.lionCurrent + direction].classList.contains(lionClass) !== true && lion.lionRun === true) {
+  //     removeLion(lion.lionCurrent)
+  //     sqs[lion.lionCurrent].classList.remove('lionrun')
+  //     lion.lionCurrent += direction
+  //     addLion(lion.lionCurrent)
+  //     sqs[lion.lionCurrent].classList.add('lionrun')
+  //   } else {
+  //     direction = directions[Math.floor(Math.random() * directions.length)]
+  //   }
+  // }
+
+
+
+
+
+
+  function zoomanHitLion(lion) {
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lion.lionRun !== true) {
+      energy -= 1
+      energyNum.innerHTML = energy
+      lions.forEach(lion => sqs[lion.lionCurrent].classList.remove(lionClass))
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = zoomanStart
+      addZooman(zoomanCurrent)
+      lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+    } else if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lion.lionRun === true) {
+      score += 250
+      sqs[lion.lionCurrent].classList.remove(lionClass, 'lionrun')
+      lion.lionCurrent = lion.lionStart
+      sqs[lion.lionCurrent].classList.add(lionClass)
     }
   }
 
-  const lions = [
-    new Lion(134, 300),
-    new Lion(135, 300),
-    new Lion(152, 300),
-    new Lion(153, 300)
-  ]
 
-  lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
+  // * Game Over function 
+  function gameOverFunc(lion) {
+    if (energy === 0) {
+      lions.forEach(lion => sqs[lion.lionCurrent].classList.remove(lionClass))
+      // clearInterval(lion.lionTick)
+      gameOver = true
+      lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+      setTimeout(() => {
+        game.classList.add('hidden')
+        gameOverDisplay.classList.remove('hidden')
+        finalScore.innerHTML = score
+        // score = 0
+        // energy = 3
+        // scoreNum.innerHTML = score
+        // energyNum.innerHTML = energy
+        // sqs.forEach(sq => sq.classList.remove(lionClass))
+        
+      }, 500)
+    }
+  }
 
 
 
@@ -286,21 +478,21 @@ function init() {
   //   }
   // }
 
-  
+
 
   // const bedSqs = [sqs[134], sqs[135], sqs[152], sqs[153]]
   // bedSqs.forEach(sq => sq.classList.add('lionMoveable'))
 
   // function lion1move() {
-    
+
   //   let lion1Tick = NaN
-    
+
 
   //   lion1Tick = setInterval(() => {
 
   //     if (sqs[lionCurrent + direction].classList.contains('moveable') || sqs[lionCurrent + direction].classList.contains('lionMoveable')) {
   //       removeLion(lionCurrent)
-        
+
 
   //       if (isXCloser() || isYCloser()) {
   //         lionCurrent += direction
@@ -317,13 +509,13 @@ function init() {
   //     if (sqs[lionCurrent].classList.contains(zoomanClass)) {
   //       clearInterval(lion1Tick)
   //     }
-      
+
 
 
 
   //   }, 300)
 
-    
+
   // }
 
   // lion1move()
@@ -331,7 +523,7 @@ function init() {
 
 
 
-// * own try at intelligent ghost movement
+  // * own try at intelligent ghost movement
   // if (sqs[lionCurrent - width].classList.contains('moveable') || sqs[lionCurrent - width].classList.contains('lionMoveable')) {
   //   lionUp(lionCurrent)
   // } else if (sqs[lionCurrent + width].classList.contains('moveable') || sqs[lionCurrent + width].classList.contains('lionMoveable')) {

@@ -4,11 +4,16 @@
     <meta charset="utf-8">
     <title>Safari Parc-Man!</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
     <script src="scripts/app.js" charset="utf-8"></script>
   </head>
   <body>
     <section class="instructions">
-      <h1>Safari Parc-Man</h1>
+      <div class="instructions-header">
+        <img class="parc-man" src="characters/parc-man.png" alt="Safari Park Man">
+        <h1>Safari Parc-Man</h1>
+        <img class="lion" src="characters/lion.png" alt="Lion Cub">
+      </div>
       <p>Help ParcMan clear up the park and find the energy to put the lion cubs to bed!</p>
       <button id="start">Start Game</button>
     </section>
@@ -20,6 +25,16 @@
       <div class="arena-wrapper">
         <div class="arena"></div>
       </div>
+    </section>
+    <section class="gameover hidden">
+      <div class="gameover-header">
+        <img class="parc-man" src="characters/parc-man.png" alt="Safari Park Man">
+        <h1>Game Over</h1>
+        <img class="lion" src="characters/lion.png" alt="Lion Cub">
+      </div>
+      <h2>ParcMan is EXHAUSTED!</h2>
+      <p>Your score <span id="final-score"></span></p>
+      <button id="again">Play Again</button>
     </section>
   </body>
 </html>
