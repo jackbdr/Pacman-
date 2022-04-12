@@ -65,7 +65,7 @@ function init() {
     for (let i = 0; i < sqCount; i++) {
       const sq = document.createElement('div')
       sq.id = i
-      sq.innerText = i
+      // sq.innerText = i
       arena.appendChild(sq)
       sqs.push(sq)
     }
@@ -438,7 +438,7 @@ function init() {
         // energyNum.innerHTML = energy
         // sqs.forEach(sq => sq.classList.remove(lionClass))
         
-      }, 500)
+      }, 1000)
     }
   }
 
