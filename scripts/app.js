@@ -54,7 +54,9 @@ function init() {
     energyNum.innerHTML = energy
     pooSqs.forEach(sq => sq.classList.add(pooClass))
     sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
+    sqs[zoomanCurrent].classList.remove(zoomanClass)
     zoomanCurrent = zoomanStart
+    sqs[zoomanCurrent].classList.add(zoomanClass)
   }
 
   // function winGame() {
@@ -382,7 +384,7 @@ function init() {
 
           if (score > 2000 && speedIncrease < lions.length) {
             speedIncrease++
-            lion.speed = 150
+            lion.speed = 175
             clearInterval(lion.lionTick)
             lions.forEach(lion => sqs[lion.lionCurrent].classList.add('lionrun'))
             setTimeout(() => {
@@ -478,15 +480,15 @@ function init() {
 
   function gameWon(lion) {
     if (pooSqs.some(sq => sq.classList.contains(pooClass)) !== true) {
-      sqs.forEach(sq => sq.classList.remove(lionClass))
-      // clearInterval(lion.lionTick)
-
-      lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+      lions.forEach(lion => sqs[lion.lionCurrent].classList.remove(lionClass))      
+      lion.lionCurrent = lion.lionStart
+      lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
       setTimeout(() => {
         game.classList.add('hidden')
         gameWonDisplay.classList.remove('hidden')
         finalScore.forEach(final => final.innerHTML = score)
         gameOver = true
+
         // score = 0
         // energy = 3
         // scoreNum.innerHTML = score
@@ -498,7 +500,7 @@ function init() {
   }
 
 
-
+  
 
 
 
