@@ -104,7 +104,7 @@ function init() {
   const pooSqs = sqs.filter(sq => sq.classList.contains(rockClass) !== true && sq.classList.contains(treeClass) !== true && sq.classList.contains('bedtopleft') !== true && sq.classList.contains('bedtopright') !== true && sq.classList.contains('bedbottomleft') !== true && sq.classList.contains('bedbottomright') !== true)
   pooSqs.forEach(sq => sq.classList.add(pooClass))
   sqs[223].classList.remove(pooClass)
-  console.log(pooSqs.length)
+  
   
 
 
@@ -212,7 +212,7 @@ function init() {
       sqs[zoomanCurrent].classList.remove(pooClass)
       score += 100
       scoreNum.innerHTML = score
-
+      
       // * lions run
       lions.forEach(lion => lion.lionRun = true)
       setTimeout(lionsBackToNorm, 8000)
@@ -239,24 +239,37 @@ function init() {
       zoomanCurrent = zoomanStart
       addZooman(zoomanCurrent)
       lions.forEach(lion => lion.lionCurrent = lion.lionStart)
-    } else if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lions.every(lion => lion.lionRun === true)) {     // when lionRun === true
+    } else if (lions.every(lion => lion.lionRun === true) && lions[0].lionCurrent === zoomanCurrent) {
       score += 250
       sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
-
-      // lions.forEach(lion => lion.lionCurrent = lion.lionStart)
-      // lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
+      lions[0].lionCurrent = lions[0].lionStart
+      console.log(lions[0].lionCurrent)
+    } else if (lions.every(lion => lion.lionRun === true) && lions[1].lionCurrent === zoomanCurrent) {
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+      lions[1].lionCurrent = lions[1].lionStart
+      console.log(lions[1].lionCurrent)
+    } else if (lions.every(lion => lion.lionRun === true) && lions[2].lionCurrent === zoomanCurrent) {
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+      lions[2].lionCurrent = lions[2].lionStart
+      console.log(lions[2].lionCurrent)
+    } else if (lions.every(lion => lion.lionRun === true) && lions[3].lionCurrent === zoomanCurrent) {
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+      lions[3].lionCurrent = lions[3].lionStart
+      console.log(lions[3].lionCurrent)
     }
 
-
-
-
+    // lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+    // lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
+    
 
 
     addZooman(zoomanCurrent)
   }
 
-
-
+  // (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) ) {
 
 
 
@@ -323,7 +336,6 @@ function init() {
     let direction = directions[Math.floor(Math.random() * directions.length)]
 
     
-
     // if (lions.every(lion => lion.lionCurrent = lion.lionStart)) ---> attempt at giving little break if have just lost a life
     setTimeout(() => {
 
@@ -357,21 +369,6 @@ function init() {
       }, lion.speed)
 
     }, 1000)
-
-    // } else {
-    //   lion.lionTick = setInterval(() => {
-
-    //     // if lionCurrent + direction is available then move into that space 
-    //     randomMoveLion(lion)
-
-    //     // zooman and lion collision
-    //     zoomanHitLion(lion)
-
-    //     // if energy reaches 0, then GameOver!!
-    //     gameOver(lion)
-
-    //   }, lion.speed)
-    // }
 
 
 
