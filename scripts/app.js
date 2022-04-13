@@ -7,20 +7,24 @@ function init() {
   const game = document.querySelector('.game')
   const gameOverDisplay = document.querySelector('.gameover')
   const againButton = document.querySelector('#again')
+  const againButton2 = document.querySelector('#again2')
   const scoreNum = document.querySelector('#scorenum')
   const energyNum = document.querySelector('#energynum')
-  const finalScore = document.querySelector('#final-score')
+  const finalScore = document.querySelectorAll('.final-score')
+  const gameWonDisplay = document.querySelector('.gamewon')
+
 
   startButton.addEventListener('click', startGame)
   againButton.addEventListener('click', restartGame)
+  againButton2.addEventListener('click', restartGame2)
 
   // score variables
   let score = 0
-  
+
 
   // energy variables
   let energy = 3
-  
+
 
   function startGame() {
     instructions.classList.add('hidden')
@@ -40,6 +44,23 @@ function init() {
     sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
   }
 
+  function restartGame2() {
+    gameWonDisplay.classList.add('hidden')
+    game.classList.remove('hidden')
+    gameOver = false
+    score = 0
+    energy = 3
+    scoreNum.innerHTML = score
+    energyNum.innerHTML = energy
+    pooSqs.forEach(sq => sq.classList.add(pooClass))
+    sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
+    zoomanCurrent = zoomanStart
+  }
+
+  // function winGame() {
+
+  // }
+
   // * Character set-up
   const zoomanClass = 'zooman'
   const zoomanStart = 223
@@ -49,7 +70,7 @@ function init() {
   // let lionStart 
   // let lionCurrent = lionStart
 
-  
+
 
 
 
@@ -104,8 +125,8 @@ function init() {
   const pooSqs = sqs.filter(sq => sq.classList.contains(rockClass) !== true && sq.classList.contains(treeClass) !== true && sq.classList.contains('bedtopleft') !== true && sq.classList.contains('bedtopright') !== true && sq.classList.contains('bedbottomleft') !== true && sq.classList.contains('bedbottomright') !== true)
   pooSqs.forEach(sq => sq.classList.add(pooClass))
   sqs[223].classList.remove(pooClass)
-  
-  
+
+
 
 
   // * add sandwich treat
@@ -130,6 +151,7 @@ function init() {
 
 
   // * movement functions *
+
 
   // * Add zooman 
   function addZooman(position) {
@@ -158,16 +180,17 @@ function init() {
     }
   }
 
-  const lions = [
-    new Lion(115, 250),
-    new Lion(118, 250),
-    new Lion(169, 250),
-    new Lion(172, 250)
+  let lions = [
+    new Lion(134, 250),
+    new Lion(135, 250),
+    new Lion(152, 250),
+    new Lion(153, 250)
   ]
 
-  lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
 
-  
+
+
+  lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
 
 
 
@@ -212,7 +235,7 @@ function init() {
       sqs[zoomanCurrent].classList.remove(pooClass)
       score += 100
       scoreNum.innerHTML = score
-      
+
       // * lions run
       lions.forEach(lion => lion.lionRun = true)
       setTimeout(lionsBackToNorm, 8000)
@@ -263,7 +286,7 @@ function init() {
 
     // lions.forEach(lion => lion.lionCurrent = lion.lionStart)
     // lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
-    
+
 
 
     addZooman(zoomanCurrent)
@@ -329,16 +352,16 @@ function init() {
 
   // * random movement 4 lions
   let gameOver = false
-  
+
+  let speedIncrease = 0
 
   function moveLion(lion) {
     const directions = [+ 1, - 1, + width, - width]
     let direction = directions[Math.floor(Math.random() * directions.length)]
 
-    
+
     // if (lions.every(lion => lion.lionCurrent = lion.lionStart)) ---> attempt at giving little break if have just lost a life
     setTimeout(() => {
-
       lion.lionTick = setInterval(() => {
         if (gameOver === false) {
           // if lionCurrent + direction is available then move into that space 
@@ -357,23 +380,37 @@ function init() {
             direction = directions[Math.floor(Math.random() * directions.length)]
           }
 
-          
+          if (score > 2000 && speedIncrease < lions.length) {
+            speedIncrease++
+            lion.speed = 150
+            clearInterval(lion.lionTick)
+            lions.forEach(lion => sqs[lion.lionCurrent].classList.add('lionrun'))
+            setTimeout(() => {
+              lions.forEach(lion => sqs[lion.lionCurrent].classList.remove('lionrun'))
+            }, 1000)
+            moveLion(lion)
+          }
+
+
           // zooman and lion collision
           zoomanHitLion(lion)
+
+          // if no poo left
+          gameWon(lion)
 
           // if energy reaches 0, then GameOver!!
           gameOverFunc(lion)
 
         }
-
       }, lion.speed)
+
+
 
     }, 1000)
 
 
 
   }
-
 
 
 
@@ -428,13 +465,34 @@ function init() {
       setTimeout(() => {
         game.classList.add('hidden')
         gameOverDisplay.classList.remove('hidden')
-        finalScore.innerHTML = score
+        finalScore.forEach(final => final.innerHTML = score)
         // score = 0
         // energy = 3
         // scoreNum.innerHTML = score
         // energyNum.innerHTML = energy
         // sqs.forEach(sq => sq.classList.remove(lionClass))
-        
+
+      }, 1000)
+    }
+  }
+
+  function gameWon(lion) {
+    if (pooSqs.some(sq => sq.classList.contains(pooClass)) !== true) {
+      sqs.forEach(sq => sq.classList.remove(lionClass))
+      // clearInterval(lion.lionTick)
+
+      lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+      setTimeout(() => {
+        game.classList.add('hidden')
+        gameWonDisplay.classList.remove('hidden')
+        finalScore.forEach(final => final.innerHTML = score)
+        gameOver = true
+        // score = 0
+        // energy = 3
+        // scoreNum.innerHTML = score
+        // energyNum.innerHTML = energy
+        // sqs.forEach(sq => sq.classList.remove(lionClass))
+
       }, 1000)
     }
   }

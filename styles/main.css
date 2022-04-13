@@ -274,6 +274,60 @@ button {
   margin-bottom: 13px;
 }
 
+.gamewon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #c2b280;
+  border-radius: 45px;
+  padding: 0px 25px 25px;
+  box-shadow: rgb(0 0 0 / 75%) 0px 54px 55px, rgb(0 0 0 / 75%) 0px -12px 30px, rgb(0 0 0 / 75%) 0px 4px 6px, rgb(0 0 0 / 75%) 0px 12px 13px, rgb(0 0 0 / 75%) 0px -3px 5px;
+  border: 2px solid #8B4513;
+}
+
+.gamewon-header {
+  display: flex;
+  align-items: center;
+}
+
+.gamewon .parc-man {
+  max-width: 100px;
+  max-height: 100px;  
+  margin-right: 40px;
+  border-radius: 20px;
+  box-shadow: rgb(14 30 37 / 40%) 0px 2px 4px 0px, rgb(14 30 37 / 40%) 0px 2px 16px 0px;
+}
+
+.gamewon .lion {
+  max-width: 90px;
+  max-height: 90px;
+  margin-left: 35px;
+}
+
+.gamewon h1 {
+  font-size: 2em;
+}
+
+.gamewon h2 {
+  font-size: 1.2em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.gamewon p {
+  font-size: 1.3em;
+}
+
+.gamewon #again2 {
+  background-color: #8B4513;
+  border-radius: 5px;
+  color: #c2b280;
+  font-size: 1.1em;
+  box-shadow: rgb(14 30 37 / 40%) 0px 2px 4px 0px, rgb(14 30 37 / 40%) 0px 2px 16px 0px;
+  margin-bottom: 13px;
+}
+
 .hidden {
   display: none;
   width: 0;
