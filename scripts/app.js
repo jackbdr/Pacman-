@@ -32,10 +32,10 @@ function init() {
     }
   }
   let lions = [
-    new Lion(134, 250),
-    new Lion(135, 250),
-    new Lion(152, 250),
-    new Lion(153, 250)
+    new Lion(134, 225),
+    new Lion(135, 225),
+    new Lion(152, 225),
+    new Lion(153, 225)
   ]
 
   // *** Lets ***
@@ -309,7 +309,6 @@ function init() {
   function moveLion(lion) {
     const directions = [+ 1, - 1, + width, - width]
     let direction = directions[Math.floor(Math.random() * directions.length)]
-
 
     // if (lions.every(lion => lion.lionCurrent = lion.lionStart)) ---> attempt at giving little break if have just lost a life
     setTimeout(() => {
