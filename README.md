@@ -1,6 +1,5 @@
 # Project-One
 
-Plan: like Iury's?
 
 section1 - what each day consisted of
 
