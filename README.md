@@ -25,8 +25,8 @@ I went for PacMan game as the idea that it was possible to build such a classic 
 * Google Fonts
 
 ## Creating the grid ("arena")
+
 ```ruby
-  // *** Create Arena ***
   const arena = document.querySelector('.arena')
   const width = 18
   const sqCount = width * width
