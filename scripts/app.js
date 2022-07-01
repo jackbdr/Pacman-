@@ -81,11 +81,11 @@ function init() {
   sqs[152].classList.add('bedbottomleft')
   sqs[153].classList.add('bedbottomright')
   
-  // poo
-  const pooClass = 'poo'
-  const pooSqs = sqs.filter(sq => sq.classList.contains(rockClass) !== true && sq.classList.contains(treeClass) !== true && sq.classList.contains('bedtopleft') !== true && sq.classList.contains('bedtopright') !== true && sq.classList.contains('bedbottomleft') !== true && sq.classList.contains('bedbottomright') !== true)
-  pooSqs.forEach(sq => sq.classList.add(pooClass))
-  sqs[223].classList.remove(pooClass)
+  // mess
+  const messClass = 'mess'
+  const messSqs = sqs.filter(sq => sq.classList.contains(rockClass) !== true && sq.classList.contains(treeClass) !== true && sq.classList.contains('bedtopleft') !== true && sq.classList.contains('bedtopright') !== true && sq.classList.contains('bedbottomleft') !== true && sq.classList.contains('bedbottomright') !== true)
+  messSqs.forEach(sq => sq.classList.add(messClass))
+  sqs[223].classList.remove(messClass)
 
   // sandwiches
   const sandwichClass = 'sandwich'
@@ -97,8 +97,8 @@ function init() {
 
 
 
-  // * make each pooSq have a certain class so zooman or lions can move into them
-  pooSqs.forEach(sq => sq.classList.add('moveable'))
+  // * make each messSq have a certain class so zooman or lions can move into them
+  messSqs.forEach(sq => sq.classList.add('moveable'))
 
   // * start off lions
   lions.forEach(lion => sqs[lion.lionCurrent].classList.add(lionClass))
@@ -123,7 +123,7 @@ function init() {
     energy = 3
     scoreNum.innerHTML = score
     energyNum.innerHTML = energy
-    pooSqs.forEach(sq => sq.classList.add(pooClass))
+    messSqs.forEach(sq => sq.classList.add(messClass))
     sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
     snoringPause()
     safariPlay()
@@ -137,7 +137,7 @@ function init() {
     energy = 3
     scoreNum.innerHTML = score
     energyNum.innerHTML = energy
-    pooSqs.forEach(sq => sq.classList.add(pooClass))
+    messSqs.forEach(sq => sq.classList.add(messClass))
     sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
     sqs[zoomanCurrent].classList.remove(zoomanClass)
     zoomanCurrent = zoomanStart
@@ -233,7 +233,7 @@ function init() {
 
     if (sqs[zoomanCurrent].classList.contains(zoomanClass && sandwichClass)) {
       sqs[zoomanCurrent].classList.remove(sandwichClass)
-      sqs[zoomanCurrent].classList.remove(pooClass)
+      sqs[zoomanCurrent].classList.remove(messClass)
       score += 100
       scoreNum.innerHTML = score
       munchPlay()
@@ -247,8 +247,8 @@ function init() {
 
     // * clearing mess
 
-    if (sqs[zoomanCurrent].classList.contains(zoomanClass && pooClass)) {
-      sqs[zoomanCurrent].classList.remove(pooClass)
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && messClass)) {
+      sqs[zoomanCurrent].classList.remove(messClass)
       score += 19
       scoreNum.innerHTML = score
     }
@@ -345,7 +345,7 @@ function init() {
           // zooman and lion collision
           zoomanHitLion(lion)
 
-          // if no poo left
+          // if no mess left
           gameWon(lion)
 
           // if energy reaches 0, then GameOver!!
@@ -400,7 +400,7 @@ function init() {
   }
 
   function gameWon(lion) {
-    if (pooSqs.some(sq => sq.classList.contains(pooClass)) !== true) {
+    if (messSqs.some(sq => sq.classList.contains(messClass)) !== true) {
       lions.forEach(lion => sqs[lion.lionCurrent].classList.remove(lionClass))
       lions.forEach(lion => sqs[lion.lionCurrent].classList.remove('lionrun'))
       lion.lionCurrent = lion.lionStart
