@@ -81,6 +81,7 @@ Please see below for how I added walls, a border of trees, a holding place for t
   const sandwichSqs = [sqs[19], sqs[34], sqs[289], sqs[304]]
   sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
 ```
+![Screenshot 2022-07-01 at 16 31 13](https://user-images.githubusercontent.com/101710474/176925196-43aceb7d-f942-4ae0-a3dd-3049b35ecdcc.png)
 
 
 section1 - what each day consisted of
