@@ -25,7 +25,7 @@ I went for PacMan game as the idea that it was possible to build such a classic 
 * Google Fonts
 
 ## Creating the grid ("arena")
-
+The grid works as the base of the "arena". Using a for loop, HTML divs are created and then appended to the parent div with class of "arena". 
 ```ruby
   const arena = document.querySelector('.arena')
   const width = 18
@@ -45,6 +45,7 @@ I went for PacMan game as the idea that it was possible to build such a classic 
     // addLion(lionStart)
   }
 ```
+With the help of flexbox CSS styling, this simply creates an 18 by 18 grid. However, I needed to 
 
 
 section1 - what each day consisted of
