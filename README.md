@@ -5,6 +5,8 @@ The first of my projects on the General Assembly Software Engineering Immersive.
 
 I went for PacMan game as the idea that it was possible to build such a classic game after two weeks really excited me! Originally I thought I would attempt to build this in the classic 80s style, but I ended up going for the theme of 'Safari ParcMan' as I liked the idea of having more creative freedom with the styling.
 
+So I should say now that PacMan is actually Safari-Parc-Man and the classic ghosts are lions!
+
 [Click to play!](https://jackbdr.github.io/Project-1/)
 
 ## The Brief
