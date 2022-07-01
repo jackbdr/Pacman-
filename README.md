@@ -50,7 +50,7 @@ To first create the grid, I used a for loop which creates HTML divs and then app
 With the help of flexbox CSS styling, this simply creates an 18 by 18 grid.
 
 Please see below for how I added walls, a border of trees and collectable items.
-```
+```ruby
 // trees 
   const treeClass = 'tree'
   const edgeSqs = sqs.filter(sq => (parseFloat(sq.id) % width === 0 && parseFloat(sq.id) !== 144) || parseFloat(sq.id) < width || (parseFloat(sq.id) % width === width - 1 && parseFloat(sq.id) !== 161) || parseFloat(sq.id) + width > sqCount)
