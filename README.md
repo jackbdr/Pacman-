@@ -39,12 +39,10 @@ To first create the grid, I used a for loop which creates HTML divs and then app
     for (let i = 0; i < sqCount; i++) {
       const sq = document.createElement('div')
       sq.id = i
-      // sq.innerText = i
       arena.appendChild(sq)
       sqs.push(sq)
     }
     addZooman(zoomanStart)
-    // addLion(lionStart)
   }
 ```
 With the help of flexbox CSS styling, this simply creates an 18 by 18 grid.
