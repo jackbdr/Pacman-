@@ -1,6 +1,6 @@
 # Project 1 - PacMan 
 
-# Overview
+## Overview
 
 
 section1 - what each day consisted of
