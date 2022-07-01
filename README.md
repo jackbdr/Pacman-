@@ -1,4 +1,4 @@
-# Project-One
+# Project-1
 
 
 section1 - what each day consisted of
