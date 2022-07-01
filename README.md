@@ -49,7 +49,7 @@ To first create the grid, I used a for loop which creates HTML divs and then app
 ```
 With the help of flexbox CSS styling, this simply creates an 18 by 18 grid.
 
-Please see below for how I added walls, a border of trees and collectable items.
+Please see below for how I added walls, a border of trees, a holding place for the lions and collectable items.
 ```ruby
   // trees 
   const treeClass = 'tree'
