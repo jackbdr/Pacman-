@@ -16,6 +16,14 @@ I went for PacMan game as the idea that it was possible to build such a classic 
 * **Deploy your game online**, where the rest of the world can access it (we will do this together at the end of the project)
 * Use **semantic markup** for HTML and CSS (adhere to best practices)
 
+## Technologies used
+* HTML5 with HTML5 audio
+* CSS3 with animation
+* JavaScript (ES6)
+* Git
+* GitHub
+* Google Fonts
+
 section1 - what each day consisted of
 
 section2 - what each language does
