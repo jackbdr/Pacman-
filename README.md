@@ -85,11 +85,14 @@ We now have the "arena" complete:
 
 ![Screenshot 2022-07-01 at 16 31 13](https://user-images.githubusercontent.com/101710474/176925196-43aceb7d-f942-4ae0-a3dd-3049b35ecdcc.png)
 
+Movement
+- 'moveable' squares
+- player movement
+- lion movement
 
-section1 - what each day consisted of
+Collision detection
 
-section2 - what each language does
 
-section3 - short psuedocode of each event (e.g. clicking start button or arrow up)
+
 
 section4 - what was main struggles, what have you learnt, future improvements
