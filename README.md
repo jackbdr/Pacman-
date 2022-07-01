@@ -7,6 +7,15 @@ I went for PacMan game as the idea that it was possible to build such a classic 
 
 [Click to play!](https://jackbdr.github.io/Project-1/)
 
+## The Brief
+* **Render a game in the browser**
+* **Design logic for winning** & **visually display which player won**
+* **Include separate HTML / CSS / JavaScript files**
+* Stick with **KISS (Keep It Simple Stupid)** and **DRY (Don't Repeat Yourself)** principles
+* Use **Javascript** for **DOM manipulation**
+* **Deploy your game online**, where the rest of the world can access it (we will do this together at the end of the project)
+* Use **semantic markup** for HTML and CSS (adhere to best practices)
+
 section1 - what each day consisted of
 
 section2 - what each language does
