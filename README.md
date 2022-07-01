@@ -91,6 +91,9 @@ Movement
 - lion movement
 
 Collision detection
+- general collision detection (short)
+- if collision between lion and zooman when no sandwich eaten
+- if collision between lion and zooman when sandwich eaten
 
 
 
