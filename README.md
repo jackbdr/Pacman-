@@ -95,7 +95,6 @@ Collision detection
 - if collision between lion and zooman when no sandwich eaten
 - if collision between lion and zooman when sandwich eaten
 
+Restart game
 
-
-
-section4 - what was main struggles, what have you learnt, future improvements
+What was main struggles, what have you learnt, future improvements
