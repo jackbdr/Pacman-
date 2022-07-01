@@ -82,6 +82,7 @@ Please see below for how I added walls, a border of trees, a holding place for t
   sandwichSqs.forEach(sq => sq.classList.add(sandwichClass))
 ```
 We now have the "arena" ready to be played in:
+
 ![Screenshot 2022-07-01 at 16 31 13](https://user-images.githubusercontent.com/101710474/176925196-43aceb7d-f942-4ae0-a3dd-3049b35ecdcc.png)
 
 
