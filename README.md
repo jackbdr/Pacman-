@@ -1,4 +1,5 @@
-# Project-1
+# Project 1 - PacMan 
+
 
 
 section1 - what each day consisted of
