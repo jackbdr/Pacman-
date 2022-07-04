@@ -125,6 +125,7 @@ Below is the start of the function "zoomanMovement". The rest of the function co
     }
 ```
 ### Lion Movement
+
 Movement
 - 'moveable' squares
 - player movement
