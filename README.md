@@ -93,10 +93,9 @@ The player needs to be able to move into any square of the grid that isn't a wal
   // * make each messSq have a certain class so zooman or lions can move into them 
   messSqs.forEach(sq => sq.classList.add('moveable'))
 ```
-
+Below is the start of the function "zoomanMovement". The rest of the function controls collision detection but I will focus on this in the next section. Displayed here is the logic which allows the player to move around "moveable" squares with the arrow keys. The logic checks to see whether the square that the player is trying to move into contains the class "moveable". If it does, then the player will move and if not, the player's position will stay the same. Also, please see the last two "else ifs" of this code block. This is the logic which allows the player to go off one side of the board and appear again on the opposite side. 
 ```ruby
   function zoomanMovement(event) {
-
     const key = event.keyCode
     const left = 37
     const right = 39
@@ -125,6 +124,7 @@ The player needs to be able to move into any square of the grid that isn't a wal
       zoomanCurrent
     }
 ```
+### Lion Movement
 Movement
 - 'moveable' squares
 - player movement
