@@ -203,15 +203,13 @@ Creating the lions in this way enabled me to create one function that controls a
     }, 1000)
   }
 ```
+The direction here is simply generated randomly, whereas I originally wanted to create intelligent movement. I will speak more about this at the end of the ReadMe! Once the direction is randomly selected, the function checks to see if there is a wall, a tree or another lion. If there isn't, the lion will move and if there is, a direction is randomly selected again. 
+
+### Collision detection between player and lions
 
 
 
 
-
-Movement
-- 'moveable' squares
-- player movement
-- lion movement
 
 Collision detection
 - general collision detection (short)
