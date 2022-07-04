@@ -143,14 +143,26 @@ The four lions are created with a class contructor:
     new Lion(153, 225)
   ]
 ```
-Creating the lions in this way enabled me to create one function that controls all four of the lions' movement at the same time. 
+Before focusing the the lions' movement I will quickly explain what happens when the player eats a sandwich as this will better explain why the lions' movement function is split into an "else if". When a sandwich is eaten, "lionRun" on all lions is set to true:
 ```ruby
-  // * random movement 4 lions
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && sandwichClass)) {
+      sqs[zoomanCurrent].classList.remove(sandwichClass)
+      sqs[zoomanCurrent].classList.remove(messClass)
+      score += 100
+      scoreNum.innerHTML = score
+      munchPlay()
+      lions.forEach(lion => lion.lionRun = true)
+      setTimeout(lionsBackToNorm, 8000)
+    }
+```
+We can then use this boolean in the lions' movement function to give a class of "lionrun" to the lions if "lionRun" is true. This class has CSS styling which causes the lions to flash. 
+
+Creating the lions in this way enabled me to create one function that controls all four of the lions' movement at the same time: 
+```ruby
   function moveLion(lion) {
     const directions = [+ 1, - 1, + width, - width]
     let direction = directions[Math.floor(Math.random() * directions.length)]
 
-    // if (lions.every(lion => lion.lionCurrent = lion.lionStart)) ---> attempt at giving little break if have just lost a life
     setTimeout(() => {
       lion.lionTick = setInterval(() => {
         if (gameOver === false) {
@@ -191,6 +203,10 @@ Creating the lions in this way enabled me to create one function that controls a
     }, 1000)
   }
 ```
+
+
+
+
 
 Movement
 - 'moveable' squares
