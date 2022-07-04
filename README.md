@@ -85,6 +85,41 @@ We now have the "arena" complete:
 
 ![Screenshot 2022-07-01 at 16 31 13](https://user-images.githubusercontent.com/101710474/176925196-43aceb7d-f942-4ae0-a3dd-3049b35ecdcc.png)
 
+## Movement
+### Player Movement
+The player needs to be able to move over all squares of the "arena" that 
+
+```ruby
+  function zoomanMovement(event) {
+
+    const key = event.keyCode
+    const left = 37
+    const right = 39
+    const up = 38
+    const down = 40
+
+    if (key === left && sqs[zoomanCurrent - 1].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent--
+    } else if (key === right && sqs[zoomanCurrent + 1].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent++
+    } else if (key === up && sqs[zoomanCurrent - width].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent -= width
+    } else if (key === down && sqs[zoomanCurrent + width].classList.contains('moveable') === true) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent += width
+    } else if (key === left && parseFloat(sqs[zoomanCurrent].id) === 144) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = 161
+    } else if (key === right && parseFloat(sqs[zoomanCurrent].id) === 161) {
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = 144
+    } else {
+      zoomanCurrent
+    }
+```
 Movement
 - 'moveable' squares
 - player movement
