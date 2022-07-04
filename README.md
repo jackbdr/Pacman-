@@ -87,7 +87,12 @@ We now have the "arena" complete:
 
 ## Movement
 ### Player Movement
-The player needs to be able to move over all squares of the "arena" that 
+The player needs to be able to move into any square of the grid that isn't a wall or border. To accomplish this, I first added a class of "moveable" to a all the "mess" squares, as this set of squares is exactly all of the squares that aren't a wall or border. 
+
+```ruby
+  // * make each messSq have a certain class so zooman or lions can move into them //
+  messSqs.forEach(sq => sq.classList.add('moveable'))
+```
 
 ```ruby
   function zoomanMovement(event) {
