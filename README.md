@@ -205,8 +205,37 @@ Creating the lions in this way enabled me to create one function that controls a
 ```
 The direction here is simply generated randomly, whereas I originally wanted to create intelligent movement. I will speak more about this at the end of the ReadMe! Once the direction is randomly selected, the function checks to see if there is a wall, a tree or another lion. If there isn't, the lion will move and if there is, a direction is randomly selected again. 
 
-### Collision detection between player and lions
-
+## Collision detection between player and lions
+One of the trickiest parts of this project was successfully writing code to detect a collision between the player and a lion. There are two ways the player and a lion can collide. The first is that the player moves into a square where there is currently a lion. The second is that a lion moves into a square where the player currently is. On top of this, I needed to also account for whether "lionRun" was true at the time of a collision. 
+### Player moves into a lion's square
+```ruby
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lions.every(lion => lion.lionRun !== true)) {
+      energy -= 1
+      energyNum.innerHTML = energy
+      lions.forEach(lion => sqs[lion.lionCurrent].classList.remove(lionClass))
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = zoomanStart
+      addZooman(zoomanCurrent)
+      lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+      yawnPlay()
+    } else if (lions.every(lion => lion.lionRun === true) && lions[0].lionCurrent === zoomanCurrent) {
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+      lions[0].lionCurrent = lions[0].lionStart
+    } else if (lions.every(lion => lion.lionRun === true) && lions[1].lionCurrent === zoomanCurrent) {
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+      lions[1].lionCurrent = lions[1].lionStart
+    } else if (lions.every(lion => lion.lionRun === true) && lions[2].lionCurrent === zoomanCurrent) {
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+      lions[2].lionCurrent = lions[2].lionStart
+    } else if (lions.every(lion => lion.lionRun === true) && lions[3].lionCurrent === zoomanCurrent) {
+      score += 250
+      sqs[zoomanCurrent].classList.remove(lionClass, 'lionrun')
+      lions[3].lionCurrent = lions[3].lionStart
+    }
+```
 
 
 
