@@ -125,6 +125,72 @@ Below is the start of the function "zoomanMovement". The rest of the function co
     }
 ```
 ### Lion Movement
+The four lions are created with a class contructor: 
+```ruby
+  class Lion {
+    constructor(lionStart, speed) {
+      this.lionStart = lionStart
+      this.speed = speed
+      this.lionCurrent = lionStart
+      this.lionTick = NaN
+      this.lionRun = false
+    }
+  }
+  let lions = [
+    new Lion(134, 225),
+    new Lion(135, 225),
+    new Lion(152, 225),
+    new Lion(153, 225)
+  ]
+```
+Creating the lions in this way enabled me to create one function that controls all four of the lions' movement at the same time. 
+```ruby
+  // * random movement 4 lions
+  function moveLion(lion) {
+    const directions = [+ 1, - 1, + width, - width]
+    let direction = directions[Math.floor(Math.random() * directions.length)]
+
+    // if (lions.every(lion => lion.lionCurrent = lion.lionStart)) ---> attempt at giving little break if have just lost a life
+    setTimeout(() => {
+      lion.lionTick = setInterval(() => {
+        if (gameOver === false) {
+          // if lionCurrent + direction is available then move into that space 
+          if ((sqs[lion.lionCurrent + direction].classList.contains('moveable') || sqs[lion.lionCurrent + direction].classList.contains('lionMoveable')) && sqs[lion.lionCurrent + direction].classList.contains(lionClass) !== true && lion.lionRun !== true) {
+            removeLion(lion.lionCurrent)
+            sqs.forEach(sq => sq.classList.remove('lionrun'))
+            lion.lionCurrent += direction
+            addLion(lion.lionCurrent)
+          } else if ((sqs[lion.lionCurrent + direction].classList.contains('moveable') || sqs[lion.lionCurrent + direction].classList.contains('lionMoveable')) && sqs[lion.lionCurrent + direction].classList.contains(lionClass) !== true && lion.lionRun === true) {
+            removeLion(lion.lionCurrent)
+            sqs[lion.lionCurrent].classList.remove('lionrun')
+            lion.lionCurrent += direction
+            addLion(lion.lionCurrent)
+            sqs[lion.lionCurrent].classList.add('lionrun')
+          } else {
+            direction = directions[Math.floor(Math.random() * directions.length)]
+          }
+
+          if (score > 2000 && speedIncrease < lions.length) {
+            speedIncrease++
+            lion.speed = 150
+            clearInterval(lion.lionTick)
+            lions.forEach(lion => sqs[lion.lionCurrent].classList.add('lionrun'))
+            setTimeout(() => {
+              lions.forEach(lion => sqs[lion.lionCurrent].classList.remove('lionrun'))
+            }, 500)
+            moveLion(lion)
+          }
+          // zooman and lion collision
+          zoomanHitLion(lion)
+          // if no mess left
+          gameWon(lion)
+          // if energy reaches 0, then GameOver!!
+          gameOverFunc(lion)
+        }
+      }, lion.speed)
+    }, 1000)
+  }
+```
 
 Movement
 - 'moveable' squares
