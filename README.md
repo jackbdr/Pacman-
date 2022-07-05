@@ -279,7 +279,7 @@ In this case, when "lionRun" is true, there is no need to individually check eac
 I was determined create intelligent movement for the lions and spent a day trying different ways of doing it! In the end it stumped me and I went for random movement with the plan of coming back to it. Although I did use up a lot of precious time on something which wasn't useable, I really enjoyed experimenting with the logic and did get some intelligent movement going for one lion! 
 
 #### Sandwich eating 
-Currently, if you eat a sandwich before the effect of the last sandwich ("lionRun") has worn off, no time is added to "lionRun". So essentially that second sandwich had no effect. I need to change this so that 8 seconds of "lionRun" is added on to whatever is left of the last "lionRun".
+Currently, if you eat a sandwich before the effect of the last sandwich ("lionRun") has worn off, no time is added to "lionRun". So, that second sandwich had no effect. I need to change this so that 8 seconds of "lionRun" is added on to whatever is left of the last "lionRun".
 
 ## Future improvements
 - Intelligent lion movement
@@ -288,4 +288,4 @@ Currently, if you eat a sandwich before the effect of the last sandwich ("lionRu
 - 3 levels instead of game finishing right away
 - Refactor code
 
-Overall, I really loved making this first project. In particular, it was the freedom to experiment with logic and see what I could create that I really enjoyed! 
+Overall, I really loved making this first project. Although we had worked with JavaScript a lot during the first two or so weeks of the course, we hadn't yet built something of this size and complexity. It taught me that there is usually not one right way of doing something and gave me the confidence to feel free to experiment with code! 
