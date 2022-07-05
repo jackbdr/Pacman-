@@ -143,7 +143,7 @@ The four lions are created with a class contructor:
     new Lion(153, 225)
   ]
 ```
-Before focusing the the lions' movement I will quickly explain what happens when the player eats a sandwich as this will better explain why the lions' movement function is split into an "else if". When a sandwich is eaten, "lionRun" on all lions is set to true:
+Before focusing on the lions' movement I will quickly explain what happens when the player eats a sandwich as this will better explain why the lions' movement function is split into an "else if". When a sandwich is eaten, "lionRun" on all lions is set to true:
 ```ruby
     if (sqs[zoomanCurrent].classList.contains(zoomanClass && sandwichClass)) {
       sqs[zoomanCurrent].classList.remove(sandwichClass)
@@ -193,7 +193,7 @@ Creating the lions in this way enabled me to create one function that controls a
             moveLion(lion)
           }
           // zooman and lion collision
-          zoomanHitLion(lion)
+          lionHitZooman(lion)
           // if no mess left
           gameWon(lion)
           // if energy reaches 0, then GameOver!!
@@ -206,8 +206,12 @@ Creating the lions in this way enabled me to create one function that controls a
 The direction here is simply generated randomly, whereas I originally wanted to create intelligent movement. I will speak more about this at the end of the ReadMe! Once the direction is randomly selected, the function checks to see if there is a wall, a tree or another lion. If there isn't, the lion will move and if there is, a direction is randomly selected again. 
 
 ## Collision detection between player and lions
-One of the trickiest parts of this project was successfully writing code to detect a collision between the player and a lion. There are two ways the player and a lion can collide. The first is that the player moves into a square where there is currently a lion. The second is that a lion moves into a square where the player currently is. On top of this, I needed to also account for whether "lionRun" was true at the time of a collision. 
+One of the trickiest parts of this project was successfully writing code to detect a collision between the player and a lion. There are two ways the player and a lion can collide. The first is that the player moves into a square where there is currently a lion. The second is that a lion moves into a square where the player currently is. On top of this, I needed to also account for whether "lionRun" was true at the time of a collision.
+
+To ensure that both types of collision are properly accounted for I needed to write code to deal with collision detection in the player movement function and also in the lions' movement function. The player's movement function recognises a collision if the player moves into a lion's square and the lions' movement function recognises the alternative.
+
 ### Player moves into a lion's square
+Here is the code which is also part of the "zoomanMovement" function seen above:
 ```ruby
     if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lions.every(lion => lion.lionRun !== true)) {
       energy -= 1
@@ -236,14 +240,28 @@ One of the trickiest parts of this project was successfully writing code to dete
       lions[3].lionCurrent = lions[3].lionStart
     }
 ```
-
-
-
-
-Collision detection
-- general collision detection (short)
-- if collision between lion and zooman when no sandwich eaten
-- if collision between lion and zooman when sandwich eaten
+If "lionRun" is false at the time of collision then the game resets and the player loses a life. However, if "lionRun" is true at the time of collision then I needed write code to work out which lion is involved and only send that lion back to the holding place. As I have an array of lions, with some control flow, it is possible to individually check whether any of the lions are occupying the same square as the player. 
+### Lion moves into player's square
+Here is the "lionHitZooman" function which is called inside of the lions' movement function:
+```ruby
+  function lionHitZooman(lion) {
+    if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lion.lionRun !== true) {
+      energy -= 1
+      energyNum.innerHTML = energy
+      lions.forEach(lion => sqs[lion.lionCurrent].classList.remove(lionClass))
+      removeZooman(zoomanCurrent)
+      zoomanCurrent = zoomanStart
+      addZooman(zoomanCurrent)
+      lions.forEach(lion => lion.lionCurrent = lion.lionStart)
+      yawnPlay()
+    } else if (sqs[zoomanCurrent].classList.contains(zoomanClass && lionClass) && lion.lionRun === true) {
+      score += 250
+      sqs[lion.lionCurrent].classList.remove(lionClass, 'lionrun')
+      lion.lionCurrent = lion.lionStart
+      sqs[lion.lionCurrent].classList.add(lionClass)
+    }
+  }
+```
 
 Restart game
 
