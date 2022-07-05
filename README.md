@@ -157,7 +157,17 @@ Before focusing on the lions' movement I will quickly explain what happens when 
 ```
 We can then use this boolean in the lions' movement function to give a class of "lionrun" to the lions if "lionRun" is true. This class has CSS styling which causes the lions to flash. 
 
-Creating the lions in this way enabled me to create one function that controls all four of the lions' movement at the same time: 
+Creating the lions in this way enabled me to create one function that controls all four of the lions' movement at the same time.
+When the game is started, the "moveLion" function is called for all four of the lions:
+```ruby
+  function startGame() {
+    instructions.classList.add('hidden')
+    game.classList.remove('hidden')
+    lions.forEach(lion => moveLion(lion))
+    safariPlay()
+  }
+```
+Here is "moveLion":
 ```ruby
   function moveLion(lion) {
     const directions = [+ 1, - 1, + width, - width]
@@ -203,7 +213,7 @@ Creating the lions in this way enabled me to create one function that controls a
     }, 1000)
   }
 ```
-The direction here is simply generated randomly, whereas I originally wanted to create intelligent movement. I will speak more about this at the end of the ReadMe! Once the direction is randomly selected, the function checks to see if there is a wall, a tree or another lion. If there isn't, the lion will move and if there is, a direction is randomly selected again. 
+The direction here is simply generated randomly, whereas I originally wanted to create intelligent movement. I will speak more about this at the end of the ReadMe! Once the direction is randomly selected, the function checks to see if there is a wall, a tree or another lion. If there isn't, the lion will move and if there is, a direction is randomly selected again.
 
 ## Collision detection between player and lions
 One of the trickiest parts of this project was successfully writing code to detect a collision between the player and a lion. There are two ways the player and a lion can collide. The first is that the player moves into a square where there is currently a lion. The second is that a lion moves into a square where the player currently is. On top of this, I needed to also account for whether "lionRun" was true at the time of a collision.
@@ -262,6 +272,7 @@ Here is the "lionHitZooman" function which is called inside of the lions' moveme
     }
   }
 ```
+
 
 Restart game
 
