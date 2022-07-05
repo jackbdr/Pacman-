@@ -275,11 +275,11 @@ Here is the "lionHitZooman" function which is called inside of the lions' moveme
 In this case, when "lionRun" is true, there is no need to individually check each lion's position and whether it occupies a square shared with the player as the "moveLion" function is running four times: once for each lion. 
 
 ## Bugs and Blockers
-* Intelligent lion movement
-- I was determined create intelligent movement for the lions and spent a day trying different ways of doing it! In the end it stumped me and I went for random movement with the plan of coming back to it. Although I did use up a lot of precious time on something which wasn't useable, I really enjoyed experimenting with the logic and did get something going! 
+#### Intelligent lion movement (chasing player)
+I was determined create intelligent movement for the lions and spent a day trying different ways of doing it! In the end it stumped me and I went for random movement with the plan of coming back to it. Although I did use up a lot of precious time on something which wasn't useable, I really enjoyed experimenting with the logic and did get some intelligent movement going for one lion! 
 
-* Sandwich eating 
-- Currently, if you eat a sandwich before the effect of the last sandwich ("lionRun") has worn off, no time is added to "lionRun". So essentially that second sandwich had no effect. 
+#### Sandwich eating 
+Currently, if you eat a sandwich before the effect of the last sandwich ("lionRun") has worn off, no time is added to "lionRun". So essentially that second sandwich had no effect. I need to change this so that 8 seconds of "lionRun" is added on to whatever is left of the last "lionRun".
 
 ## Future improvements
 - Intelligent lion movement
@@ -288,4 +288,4 @@ In this case, when "lionRun" is true, there is no need to individually check eac
 - 3 levels instead of game finishing right away
 - Refactor code
 
-Overall, I really loved making this first project. In particular it was the freedom it gave me to experiment with logic that I really enjoyed. 
+Overall, I really loved making this first project. In particular, it was the freedom to experiment with logic and see what I could create that I really enjoyed! 
