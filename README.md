@@ -250,7 +250,7 @@ Here is the code which is also part of the "zoomanMovement" function seen above:
       lions[3].lionCurrent = lions[3].lionStart
     }
 ```
-If "lionRun" is false at the time of collision then the game resets and the player loses a life. However, if "lionRun" is true at the time of collision then I needed write code to work out which lion is involved and only send that lion back to the holding place. As I have an array of lions, with some control flow, it is possible to individually check whether any of the lions are occupying the same square as the player. 
+If "lionRun" is false at the time of collision then the game resets and the player loses a life. However, for when "lionRun" is true at the time of collision I needed write code to work out which lion is involved and only send that lion back to the holding place. As I have an array of lions, with some control flow, it is possible to individually check whether any of the lions are occupying the same square as the player. 
 ### Lion moves into player's square
 Here is the "lionHitZooman" function which is called inside of the lions' movement function:
 ```ruby
