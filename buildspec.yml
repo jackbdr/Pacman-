@@ -6,4 +6,4 @@ phases:
       - pip install --upgrade awscli
   build:
     commands:
-      - aws s3 sync ./public_html s3://cdn.safariparcman.com/ --acl public-read
+      - aws s3 sync . s3://cdn.safariparcman.com/ --acl public-read
